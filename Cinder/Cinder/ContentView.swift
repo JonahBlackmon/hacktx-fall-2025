@@ -197,8 +197,11 @@ struct ContentView: View {
 
     @ViewBuilder
     private var profileTab: some View {
+        // Attach automatic save/print handlers to the ScrollView so any change in profile state triggers a save.
         ScrollView {
             VStack(spacing: 16) {
+                
+
                 profileHeader
                 zodiacView
                 elementView
@@ -217,6 +220,18 @@ struct ContentView: View {
             }
             .padding(.top, 24)
         }
+        // run an initial save when profile tab appears and whenever relevant state changes
+        .onAppear { saveAndPrintPreferences() }
+        .onChange(of: birthday) { _ in saveAndPrintPreferences() }
+        .onChange(of: selectedVibes) { _ in saveAndPrintPreferences() }
+        .onChange(of: selectedCategory) { _ in saveAndPrintPreferences() }
+        .onChange(of: selectedCarTypes) { _ in saveAndPrintPreferences() }
+        .onChange(of: selectedFuelTypes) { _ in saveAndPrintPreferences() }
+        .onChange(of: selectedMpgOptions) { _ in saveAndPrintPreferences() }
+        .onChange(of: selectedRanges) { _ in saveAndPrintPreferences() }
+        .onChange(of: selectedSeatings) { _ in saveAndPrintPreferences() }
+        .onChange(of: selectedPriceOptions) { _ in saveAndPrintPreferences() }
+        .onChange(of: selectedTab) { _ in saveAndPrintPreferences() }
     }
 
     // -- small wrappers to reduce type-check complexity --
@@ -729,4 +744,132 @@ private func element(for date: Date) -> (name: String, emoji: String) {
     if air.contains(sign)  { return ("Air", "🌬️") }
     if water.contains(sign) { return ("Water", "💧") }
     return ("Unknown", "❓")
+}
+
+// --- Preferences Codable model + import/export helpers ---
+private struct Preferences: Codable {
+    var birthday: Date
+    var selectedVibes: [String]
+    var selectedCategory: String?
+    var selectedCarTypes: [String]
+    var selectedFuelTypes: [String]
+    var selectedMpgOptions: [String]
+    var selectedRanges: [String]
+    var selectedSeatings: [String]
+    var selectedPriceOptions: [String]
+    var selectedTab: Int
+
+    // Added derived zodiac/element fields so the saved JSON includes that info
+    var zodiacName: String
+    var zodiacEmoji: String
+    var zodiacDateRange: String
+    var elementName: String
+    var elementEmoji: String
+}
+
+extension ContentView {
+    // build Preferences from current state
+    private func currentPreferences() -> Preferences {
+        let z = zodiacSign(for: birthday)
+        let el = element(for: birthday)
+
+        return Preferences(
+            birthday: birthday,
+            selectedVibes: Array(selectedVibes),
+            selectedCategory: selectedCategory,
+            selectedCarTypes: Array(selectedCarTypes),
+            selectedFuelTypes: Array(selectedFuelTypes),
+            selectedMpgOptions: Array(selectedMpgOptions),
+            selectedRanges: Array(selectedRanges),
+            selectedSeatings: Array(selectedSeatings),
+            selectedPriceOptions: Array(selectedPriceOptions),
+            selectedTab: selectedTab,
+            // derived fields
+            zodiacName: z.name,
+            zodiacEmoji: z.emoji,
+            zodiacDateRange: z.dateRange,
+            elementName: el.name,
+            elementEmoji: el.emoji
+        )
+    }
+
+    // apply decoded Preferences to the view state
+    private func applyPreferences(_ p: Preferences) {
+        birthday = p.birthday
+        selectedVibes = Set(p.selectedVibes)
+        selectedCategory = p.selectedCategory
+        selectedCarTypes = Set(p.selectedCarTypes)
+        selectedFuelTypes = Set(p.selectedFuelTypes)
+        selectedMpgOptions = Set(p.selectedMpgOptions)
+        selectedRanges = Set(p.selectedRanges)
+        selectedSeatings = Set(p.selectedSeatings)
+        selectedPriceOptions = Set(p.selectedPriceOptions)
+        selectedTab = p.selectedTab
+        // zodiac/element are derived from birthday so no direct assignment required
+    }
+
+    // convenience: export + save + print (used for automatic saving)
+    private func saveAndPrintPreferences() {
+        Task {
+            do {
+                // exportPreferencesJSON prints JSON
+                _ = try exportPreferencesJSON()
+                // savePreferencesToDocuments prints saved path
+                _ = try savePreferencesToDocuments()
+            } catch {
+                print("Auto-save error:", error)
+            }
+        }
+    }
+    
+    // Export preferences to JSON string
+    func exportPreferencesJSON() throws -> String {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+        let data = try encoder.encode(currentPreferences())
+        let json = String(data: data, encoding: .utf8) ?? ""
+        // print for verification
+        print("Preferences JSON:\n\(json)")
+        return json
+    }
+
+    // Import preferences from JSON string
+    func importPreferencesJSON(_ json: String) throws {
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        guard let data = json.data(using: .utf8) else { throw NSError(domain: "Import", code: 1) }
+        let prefs = try decoder.decode(Preferences.self, from: data)
+        applyPreferences(prefs)
+    }
+
+    // Save JSON to Documents/preferences.json
+    func savePreferencesToDocuments() throws -> URL {
+        let json = try exportPreferencesJSON()
+        let fm = FileManager.default
+        let docs = try fm.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let file = docs.appendingPathComponent("preferences.json")
+        try Data(json.utf8).write(to: file, options: .atomic)
+        // print saved file location for verification
+        print("Saved preferences to: \(file.path)")
+        return file
+    }
+
+    // Load JSON from Documents/preferences.json (if present) and print only — do NOT import/apply it
+    func loadPreferencesFromDocuments() throws {
+        let fm = FileManager.default
+        let docs = try fm.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        let file = docs.appendingPathComponent("preferences.json")
+
+        // avoid fopen/no-such-file noise: check existence first
+        guard fm.fileExists(atPath: file.path) else {
+            print("No preferences.json found at: \(file.path)")
+            return
+        }
+
+        let data = try Data(contentsOf: file)
+        let json = String(data: data, encoding: .utf8) ?? ""
+        // print loaded JSON for verification — do NOT attempt to import/apply it
+        print("Loaded preferences JSON (not imported):\n\(json)")
+    }
 }
