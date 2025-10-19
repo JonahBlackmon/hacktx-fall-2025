@@ -10,6 +10,8 @@ import SwiftData
 
 @main
 struct CinderApp: App {
+    @StateObject var settingsManager: SettingsManager = SettingsManager()
+    @StateObject var navState: NavigationState = NavigationState()
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Item.self,
@@ -25,7 +27,9 @@ struct CinderApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            MainView()
+                .environmentObject(settingsManager)
+                .environmentObject(navState)
         }
         .modelContainer(sharedModelContainer)
     }
