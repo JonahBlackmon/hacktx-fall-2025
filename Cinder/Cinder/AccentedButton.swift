@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct AccentedButton: View {
-    private var animationDuration: Double = 1.0
+    var animationDuration: Double = 1.0
+    @State var imageName: String
     var body: some View {
-        Image("ButtonAccent1")
+        Image(imageName)
             .resizable()
             .scaledToFit()
             .ignoresSafeArea()
@@ -20,6 +21,6 @@ struct AccentedButton: View {
 
 
 
-#Preview {
-    AccentedButton()
-}
+//#Preview {
+//    AccentedButton()
+//}

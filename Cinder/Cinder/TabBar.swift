@@ -37,15 +37,6 @@ struct CustomTabBar: View {
         .frame(maxHeight: .infinity, alignment: .bottom)
     }
     
-    @ViewBuilder
-    private func tabButtonBackground(for tabName: String) -> some View {
-        if navState.currentView == tabName {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(settingsManager.accentColor.opacity(0.3))
-                .frame(width: 75, height: 40)
-        }
-    }
-    
     private func tabButton(for tab: (String, String)) -> some View {
         let (toggle, _) = toggles[tab.0, default: (false, false)]
         let animationDuration: Double = 0.3
@@ -92,14 +83,16 @@ struct CustomTabBar: View {
         @EnvironmentObject var navState: NavigationState
         @EnvironmentObject var settingsManager: SettingsManager
         var name: String {
-            return navState.currentView == tabName && tabName != "Events" ? iconName + ".fill" : iconName
+            return navState.currentView == tabName ? iconName + "Clicked" : iconName
         }
         
         var body: some View {
             ZStack {
-                Image(systemName: name)
-                    .foregroundStyle(navState.currentView == tabName ? settingsManager.accentColor : settingsManager.darkerAccent)
-                    .font(.system(size: 25))
+                Image(name)
+                    .resizable()
+                    .scaledToFit()
+                    .ignoresSafeArea()
+                    .frame(width: 25, height: 25)
             }
         }
     }
@@ -113,15 +106,25 @@ struct CustomTabBar: View {
     
     private func handleTabTap(for tabName: String) {
         let oldName = navState.currentView
+        if oldName == tabName { return } // ignore re-clicks
+        
+        // Update current view
         navState.currentView = tabName
-        if navState.currentView != oldName {
-            toggles[tabName, default: (false, false)].0.toggle()
-            toggles[tabName, default: (false, false)].1 = true
-            DispatchQueue.main.asyncAfter(deadline: .now() + ((tabName == "Map") ? 2.75 : 3.0)) {
-                toggles[tabName, default: (false, false)].1 = false
-            }
+        
+        // Reset all toggles first (so only one animates)
+        for key in tabItems.map(\.0) {
+            toggles[key] = (false, false)
+        }
+        
+        // Trigger animation for new tab
+        toggles[tabName, default: (false, false)].0.toggle()
+        toggles[tabName, default: (false, false)].1 = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            toggles[tabName, default: (false, false)].1 = false
         }
     }
+
     
 }
 

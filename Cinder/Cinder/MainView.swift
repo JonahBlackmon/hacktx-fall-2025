@@ -12,7 +12,12 @@ struct MainView: View {
     @EnvironmentObject var navState: NavigationState
     @EnvironmentObject var settingsManager: SettingsManager
     
-    let tabBar: [(String, String)] = [("Home", "car"), ("Likes", "heart"), ("Profile", "person")]
+    // Change to [(Display Name, Image Name)]
+    let tabBar: [(String, String)] = [
+        ("Home", "HomeButton"),
+        ("Likes", "LikeMenuButton"),
+        ("Profile", "ProfileButton")
+    ]
     
     var body: some View {
         mainView
