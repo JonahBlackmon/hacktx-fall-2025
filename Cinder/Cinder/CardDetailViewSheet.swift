@@ -24,8 +24,8 @@ struct CarDetailSheetView: View {
                     Circle()
                         .fill(
                             index % 3 == 0 ? Color.white.opacity(Double.random(in: 0.3...0.6)) :
-                            index % 3 == 1 ? Color.blue.opacity(Double.random(in: 0.2...0.4)) :
-                            Color.purple.opacity(Double.random(in: 0.2...0.4))
+                            index % 3 == 1 ? Color.red.opacity(Double.random(in: 0.2...0.4)) :
+                            Color.pink.opacity(Double.random(in: 0.2...0.4))
                         )
                         .frame(width: CGFloat.random(in: 1...2))
                         .position(
@@ -83,7 +83,7 @@ struct CarDetailSheetView: View {
                         .font(.system(size: 32))
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.white.opacity(0.9), .blue.opacity(0.7)],
+                                colors: [.white.opacity(0.9), .red.opacity(0.7)],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
                             )
@@ -112,7 +112,7 @@ struct CarDetailSheetView: View {
                             .font(.system(size: 24))
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.white, .blue.opacity(0.9)],
+                                    colors: [.white, .red.opacity(0.9)],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
@@ -130,7 +130,7 @@ struct CarDetailSheetView: View {
                             .fontWeight(.semibold)
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.green.opacity(0.9), .blue.opacity(0.8)],
+                                    colors: [Color.beige.opacity(0.9), .red.opacity(0.8)],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
@@ -215,7 +215,7 @@ struct CarDetailSheetView: View {
                         .font(.body)
                         .foregroundStyle(
                             LinearGradient(
-                                colors: [.white.opacity(0.9), .blue.opacity(0.8)],
+                                colors: [.white.opacity(0.9), .red.opacity(0.8)],
                                 startPoint: .leading,
                                 endPoint: .trailing
                             )
@@ -228,8 +228,8 @@ struct CarDetailSheetView: View {
                         .fill(
                             LinearGradient(
                                 colors: [
-                                    Color.blue.opacity(0.15),
-                                    Color.purple.opacity(0.1)
+                                    Color.red.opacity(0.15),
+                                    Color.pink.opacity(0.1)
                                 ],
                                 startPoint: .topLeading,
                                 endPoint: .bottomTrailing
@@ -238,7 +238,7 @@ struct CarDetailSheetView: View {
                 )
                 .overlay(
                     RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.blue.opacity(0.3), lineWidth: 1)
+                        .stroke(Color.red.opacity(0.3), lineWidth: 1)
                 )
             }
         }
@@ -289,7 +289,7 @@ struct CarDetailSheetView: View {
                                 .font(.system(size: 36, weight: .bold))
                                 .foregroundStyle(
                                     LinearGradient(
-                                        colors: [.green.opacity(0.9), .blue.opacity(0.8)],
+                                        colors: [Color.beige.opacity(0.9), .red.opacity(0.8)],
                                         startPoint: .leading,
                                         endPoint: .trailing
                                     )
@@ -307,8 +307,8 @@ struct CarDetailSheetView: View {
                             .fill(
                                 LinearGradient(
                                     colors: [
-                                        Color.green.opacity(0.15),
-                                        Color.blue.opacity(0.1)
+                                        Color.beige.opacity(0.15),
+                                        Color.red.opacity(0.1)
                                     ],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
@@ -319,7 +319,7 @@ struct CarDetailSheetView: View {
                         RoundedRectangle(cornerRadius: 12)
                             .stroke(
                                 estimatedMonthly <= Double(maxMonthly) ?
-                                Color.green.opacity(0.4) : Color.red.opacity(0.4),
+                                Color.beige.opacity(0.4) : Color.red.opacity(0.4),
                                 lineWidth: 1
                             )
                     )
@@ -327,7 +327,7 @@ struct CarDetailSheetView: View {
                     // Affordability indicator
                     HStack(spacing: 8) {
                         Image(systemName: estimatedMonthly <= Double(maxMonthly) ? "checkmark.circle.fill" : "exclamationmark.triangle.fill")
-                            .foregroundColor(estimatedMonthly <= Double(maxMonthly) ? .green : .orange)
+                            .foregroundColor(estimatedMonthly <= Double(maxMonthly) ? Color.beige : .orange)
                         
                         Text(estimatedMonthly <= Double(maxMonthly) ?
                              "This fits your budget" :
@@ -404,8 +404,8 @@ struct CelestialDetailCard<Content: View>: View {
                     LinearGradient(
                         colors: [
                             Color.white.opacity(0.1),
-                            Color.blue.opacity(0.2),
-                            Color.purple.opacity(0.2)
+                            Color.red.opacity(0.2),
+                            Color.pink.opacity(0.2)
                         ],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
@@ -436,8 +436,8 @@ struct CelestialDetailCard<Content: View>: View {
                             LinearGradient(
                                 colors: [
                                     Color.white.opacity(0.3),
-                                    Color.blue.opacity(0.3),
-                                    Color.purple.opacity(0.3),
+                                    Color.red.opacity(0.3),
+                                    Color.pink.opacity(0.3),
                                     Color.white.opacity(0.3)
                                 ],
                                 startPoint: .topLeading,
@@ -470,7 +470,7 @@ struct DetailSectionHeader: View {
                     .font(.system(size: 16))
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.white, .blue.opacity(0.8)],
+                            colors: [.white, .red.opacity(0.8)],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -496,7 +496,7 @@ struct SpecificationRow: View {
         HStack(spacing: 12) {
             Image(systemName: icon)
                 .font(.system(size: 16))
-                .foregroundColor(.blue.opacity(0.7))
+                .foregroundColor(.red.opacity(0.7))
                 .frame(width: 24)
             
             Text(label)
@@ -524,7 +524,7 @@ struct FinancialMetricBox: View {
                 .font(.system(size: 20))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.white, .blue.opacity(0.8)],
+                        colors: [.white, .red.opacity(0.8)],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
                     )
@@ -560,3 +560,4 @@ struct FinancialMetricBox: View {
         )
     }
 }
+

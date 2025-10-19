@@ -18,14 +18,14 @@ struct ProfileView: View {
             Color.black.opacity(0.3)
                 .ignoresSafeArea()
             
-            // Celestial stars overlay
+            // Mystical stars overlay
             GeometryReader { geometry in
                 ForEach(0..<50, id: \.self) { index in
                     Circle()
                         .fill(
                             index % 3 == 0 ? Color.white.opacity(Double.random(in: 0.4...0.8)) :
-                            index % 3 == 1 ? Color.blue.opacity(Double.random(in: 0.3...0.6)) :
-                            Color.purple.opacity(Double.random(in: 0.3...0.6))
+                            index % 3 == 1 ? Color.red.opacity(Double.random(in: 0.3...0.6)) :
+                            Color.pink.opacity(Double.random(in: 0.3...0.6))
                         )
                         .frame(width: CGFloat.random(in: 1...3))
                         .position(
@@ -59,11 +59,11 @@ struct ProfileView: View {
     // MARK: - Header
     
     private var profileHeader: some View {
-        Text("Your Profile")
+        Text("Your Cosmic Profile")
             .font(.system(size: 32, weight: .bold))
             .foregroundStyle(
                 LinearGradient(
-                    colors: [.white, .blue.opacity(0.9), .purple.opacity(0.8)],
+                    colors: [.white, .red.opacity(0.9), Color.beige.opacity(0.8)],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
@@ -357,8 +357,8 @@ struct CelestialCard<Content: View>: View {
                     LinearGradient(
                         colors: [
                             Color.white.opacity(0.1),
-                            Color.blue.opacity(0.2),
-                            Color.purple.opacity(0.2)
+                            Color.red.opacity(0.2),
+                            Color.pink.opacity(0.2)
                         ],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
@@ -390,8 +390,8 @@ struct CelestialCard<Content: View>: View {
                             LinearGradient(
                                 colors: [
                                     Color.white.opacity(0.3),
-                                    Color.blue.opacity(0.3),
-                                    Color.purple.opacity(0.3),
+                                    Color.red.opacity(0.3),
+                                    Color.pink.opacity(0.3),
                                     Color.white.opacity(0.3)
                                 ],
                                 startPoint: .topLeading,
@@ -418,7 +418,7 @@ struct SectionHeader: View {
                 .font(.system(size: 16))
                 .foregroundStyle(
                     LinearGradient(
-                        colors: [.white, .blue.opacity(0.8)],
+                        colors: [.white, .red.opacity(0.8)],
                         startPoint: .leading,
                         endPoint: .trailing
                     )
@@ -447,7 +447,7 @@ struct CategoryButton: View {
                 .background(
                     isSelected ?
                     LinearGradient(
-                        colors: [.blue.opacity(0.8), .purple.opacity(0.7)],
+                        colors: [.red.opacity(0.8), .pink.opacity(0.7)],
                         startPoint: .leading,
                         endPoint: .trailing
                     ) :
@@ -466,7 +466,7 @@ struct CategoryButton: View {
                             lineWidth: 1
                         )
                 )
-                .shadow(color: isSelected ? .blue.opacity(0.3) : .clear, radius: 8)
+                .shadow(color: isSelected ? .red.opacity(0.3) : .clear, radius: 8)
         }
         .buttonStyle(.plain)
     }
@@ -494,7 +494,7 @@ struct VibeButton: View {
             .background(
                 isSelected ?
                 LinearGradient(
-                    colors: [.blue.opacity(0.8), .purple.opacity(0.7)],
+                    colors: [.red.opacity(0.8), .pink.opacity(0.7)],
                     startPoint: .leading,
                     endPoint: .trailing
                 ) :
@@ -533,7 +533,7 @@ struct OptionChip: View {
                 .background(
                     isSelected ?
                     LinearGradient(
-                        colors: [.green.opacity(0.8), .blue.opacity(0.7)],
+                        colors: [.red.opacity(0.8), .pink.opacity(0.7)],
                         startPoint: .leading,
                         endPoint: .trailing
                     ) :
@@ -567,7 +567,7 @@ struct FinancialInfoBox: View {
                 Image(systemName: "info.circle.fill")
                     .foregroundStyle(
                         LinearGradient(
-                            colors: [.blue, .cyan],
+                            colors: [.red, .pink],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
                         )
@@ -593,8 +593,8 @@ struct FinancialInfoBox: View {
                 .fill(
                     LinearGradient(
                         colors: [
-                            Color.blue.opacity(0.15),
-                            Color.cyan.opacity(0.1)
+                            Color.red.opacity(0.15),
+                            Color.pink.opacity(0.1)
                         ],
                         startPoint: .topLeading,
                         endPoint: .bottomTrailing
@@ -603,7 +603,7 @@ struct FinancialInfoBox: View {
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(Color.blue.opacity(0.3), lineWidth: 1)
+                .stroke(Color.red.opacity(0.3), lineWidth: 1)
         )
     }
     

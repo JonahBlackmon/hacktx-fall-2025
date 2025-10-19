@@ -13,18 +13,18 @@ struct LikedView: View {
     
     var body: some View {
         ZStack {
-            
             // Semi-transparent overlay to dim the background
             Color.black.opacity(0.3)
                 .ignoresSafeArea()
+            
             // Celestial stars and particles overlay
             GeometryReader { geometry in
                 ForEach(0..<50, id: \.self) { index in
                     Circle()
                         .fill(
                             index % 3 == 0 ? Color.white.opacity(Double.random(in: 0.4...0.8)) :
-                                index % 3 == 1 ? Color.blue.opacity(Double.random(in: 0.3...0.6)) :
-                                Color.purple.opacity(Double.random(in: 0.3...0.6))
+                            index % 3 == 1 ? Color.blue.opacity(Double.random(in: 0.3...0.6)) :
+                            Color.purple.opacity(Double.random(in: 0.3...0.6))
                         )
                         .frame(width: CGFloat.random(in: 1...3))
                         .position(
@@ -49,7 +49,7 @@ struct LikedView: View {
                             .font(.system(size: 60))
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.white, .blue.opacity(0.8), .purple.opacity(0.7)],
+                                    colors: [.white, .red.opacity(0.8), .pink.opacity(0.7)],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
@@ -69,21 +69,8 @@ struct LikedView: View {
                         .padding(.horizontal, 40)
                         .shadow(color: .black.opacity(0.5), radius: 2)
                 }
-                .padding(.top, 100)
             } else {
                 ScrollView {
-                    VStack {
-                        HStack {
-                            Text("Liked Cars")
-                                .bold()
-                                .frame(alignment: .leading)
-                                .font(.system(size: 20))
-                                .foregroundStyle(settingsManager.accentColor)
-                                .padding()
-                            Spacer()
-                        }
-                        Spacer()
-                    }
                     LazyVGrid(
                         columns: [
                             GridItem(.flexible(), spacing: 16),
@@ -113,14 +100,14 @@ struct LikedCarCell: View {
         VStack(spacing: 0) {
             // Celestial card with glass effect
             ZStack {
-                // Outer celestial glow
+                // Outer mystical glow
                 RoundedRectangle(cornerRadius: 12)
                     .fill(
                         LinearGradient(
                             colors: [
                                 Color.white.opacity(0.1),
-                                Color.blue.opacity(0.2),
-                                Color.purple.opacity(0.2)
+                                Color.red.opacity(0.2),
+                                Color.pink.opacity(0.2)
                             ],
                             startPoint: .topLeading,
                             endPoint: .bottomTrailing
@@ -154,8 +141,8 @@ struct LikedCarCell: View {
                                 LinearGradient(
                                     colors: [
                                         Color.white.opacity(0.3),
-                                        Color.blue.opacity(0.3),
-                                        Color.purple.opacity(0.3),
+                                        Color.red.opacity(0.3),
+                                        Color.pink.opacity(0.3),
                                         Color.white.opacity(0.3)
                                     ],
                                     startPoint: .topLeading,
@@ -178,8 +165,8 @@ struct LikedCarCell: View {
                             .fill(
                                 RadialGradient(
                                     colors: [
-                                        Color.blue.opacity(0.3),
-                                        Color.purple.opacity(0.2),
+                                        Color.red.opacity(0.3),
+                                        Color.pink.opacity(0.2),
                                         Color.clear
                                     ],
                                     center: .center,
@@ -193,7 +180,7 @@ struct LikedCarCell: View {
                             .font(.system(size: 32))
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.white, .blue.opacity(0.9), .purple.opacity(0.8)],
+                                    colors: [.white, .red.opacity(0.9), .pink.opacity(0.8)],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
                                 )
@@ -216,7 +203,7 @@ struct LikedCarCell: View {
                             .font(.system(size: 13, weight: .medium))
                             .foregroundStyle(
                                 LinearGradient(
-                                    colors: [.white, .blue.opacity(0.8)],
+                                    colors: [.white, .red.opacity(0.8)],
                                     startPoint: .leading,
                                     endPoint: .trailing
                                 )
@@ -271,7 +258,7 @@ struct SpecRow: View {
         HStack(spacing: 6) {
             Image(systemName: icon)
                 .font(.system(size: 10))
-                .foregroundColor(.blue.opacity(0.7))
+                .foregroundColor(.red.opacity(0.7))
             
             Text(text)
                 .font(.system(size: 11))
