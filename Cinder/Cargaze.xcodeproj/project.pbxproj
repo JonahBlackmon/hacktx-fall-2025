@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		804526D42EA40B8B007D2516 /* Cinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		804526D42EA40B8B007D2516 /* Cargaze.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cargaze.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		804526D62EA40B8B007D2516 /* Cinder */ = {
+		804526D62EA40B8B007D2516 /* Cargaze */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Cinder;
+			path = Cargaze;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		804526CB2EA40B8B007D2516 = {
 			isa = PBXGroup;
 			children = (
-				804526D62EA40B8B007D2516 /* Cinder */,
+				804526D62EA40B8B007D2516 /* Cargaze */,
 				804526D52EA40B8B007D2516 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -40,7 +40,7 @@
 		804526D52EA40B8B007D2516 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				804526D42EA40B8B007D2516 /* Cinder.app */,
+				804526D42EA40B8B007D2516 /* Cargaze.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		804526D32EA40B8B007D2516 /* Cinder */ = {
+		804526D32EA40B8B007D2516 /* Cargaze */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 804526E12EA40B8D007D2516 /* Build configuration list for PBXNativeTarget "Cinder" */;
+			buildConfigurationList = 804526E12EA40B8D007D2516 /* Build configuration list for PBXNativeTarget "Cargaze" */;
 			buildPhases = (
 				804526D02EA40B8B007D2516 /* Sources */,
 				804526D12EA40B8B007D2516 /* Frameworks */,
@@ -61,13 +61,13 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				804526D62EA40B8B007D2516 /* Cinder */,
+				804526D62EA40B8B007D2516 /* Cargaze */,
 			);
-			name = Cinder;
+			name = Cargaze;
 			packageProductDependencies = (
 			);
 			productName = Cinder;
-			productReference = 804526D42EA40B8B007D2516 /* Cinder.app */;
+			productReference = 804526D42EA40B8B007D2516 /* Cargaze.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 804526CF2EA40B8B007D2516 /* Build configuration list for PBXProject "Cinder" */;
+			buildConfigurationList = 804526CF2EA40B8B007D2516 /* Build configuration list for PBXProject "Cargaze" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -99,7 +99,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				804526D32EA40B8B007D2516 /* Cinder */,
+				804526D32EA40B8B007D2516 /* Cargaze */,
 			);
 		};
 /* End PBXProject section */
@@ -315,7 +315,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		804526CF2EA40B8B007D2516 /* Build configuration list for PBXProject "Cinder" */ = {
+		804526CF2EA40B8B007D2516 /* Build configuration list for PBXProject "Cargaze" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				804526DF2EA40B8D007D2516 /* Debug */,
@@ -324,7 +324,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		804526E12EA40B8D007D2516 /* Build configuration list for PBXNativeTarget "Cinder" */ = {
+		804526E12EA40B8D007D2516 /* Build configuration list for PBXNativeTarget "Cargaze" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				804526E22EA40B8D007D2516 /* Debug */,
