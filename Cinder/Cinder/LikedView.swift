@@ -71,6 +71,17 @@ struct LikedView: View {
                 }
             } else {
                 ScrollView {
+                    Text("Liked Cars")
+                        .font(.system(size: 32, weight: .bold))
+                        .foregroundStyle(
+                            LinearGradient(
+                                colors: [.white, .red.opacity(0.9), Color.beige.opacity(0.8)],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .shadow(color: .white.opacity(0.3), radius: 10)
+                        .padding(.horizontal, 16)
                     LazyVGrid(
                         columns: [
                             GridItem(.flexible(), spacing: 16),
