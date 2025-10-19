@@ -15,7 +15,7 @@ struct MainView: View {
     // Change to [(Display Name, Image Name)]
     let tabBar: [(String, String)] = [
         ("Home", "HomeButton"),
-        ("Likes", "LikeButton"),
+        ("Likes", "LikeMenuButton"),
         ("Profile", "ProfileButton")
     ]
     
