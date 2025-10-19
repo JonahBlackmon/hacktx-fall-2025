@@ -2,6 +2,7 @@
 // Add this as a new file to your project
 
 import Foundation
+import Combine
 
 // MARK: - Toyota Vehicle Data Table
 struct ToyotaVehicleData: Identifiable {
@@ -24,6 +25,7 @@ struct ToyotaVehicleData: Identifiable {
 
 // MARK: - Complete Toyota Vehicle Database (2023-2024)
 class ToyotaDatabase: ObservableObject {
+    
     static let shared = ToyotaDatabase()
     
     let vehicles: [ToyotaVehicleData] = [

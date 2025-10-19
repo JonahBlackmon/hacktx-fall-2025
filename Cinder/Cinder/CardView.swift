@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+ 
 struct CardView: View {
     @State var car: Car? = nil
     @EnvironmentObject var imageService: CarImageService

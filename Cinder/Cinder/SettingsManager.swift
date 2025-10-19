@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct Keys {
     static let PrimaryColor = "PrimaryColor"
@@ -60,6 +61,7 @@ struct CategoryPreset: Identifiable {
 
 // Manager in charge of data related to UserDefaults and user preferences
 class SettingsManager: ObservableObject {
+    
     let defaults = UserDefaults.standard
     
     // Theme colors
