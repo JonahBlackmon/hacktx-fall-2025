@@ -92,14 +92,16 @@ struct CustomTabBar: View {
         @EnvironmentObject var navState: NavigationState
         @EnvironmentObject var settingsManager: SettingsManager
         var name: String {
-            return navState.currentView == tabName && tabName != "Events" ? iconName + ".fill" : iconName
+            return navState.currentView == tabName ? iconName + "Clicked" : iconName
         }
         
         var body: some View {
             ZStack {
-                Image(systemName: name)
-                    .foregroundStyle(navState.currentView == tabName ? settingsManager.accentColor : settingsManager.darkerAccent)
-                    .font(.system(size: 25))
+                Image(name)
+                    .resizable()
+                    .scaledToFit()
+                    .ignoresSafeArea()
+                    .frame(width: 25, height: 25)
             }
         }
     }
