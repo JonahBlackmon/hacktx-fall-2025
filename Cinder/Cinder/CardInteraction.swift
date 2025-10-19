@@ -11,7 +11,9 @@ struct CardInteraction: View {
     @EnvironmentObject var settingsManager: SettingsManager
     @EnvironmentObject var navState: NavigationState
     @ObservedObject var controller: CardStackController
+    @State var toggle1: Bool = false
     @State var toggle2: Bool = false
+    @State var toggle3: Bool = false
     let animationDuration: Double = 1.0
     var body: some View {
         HStack {
@@ -20,14 +22,30 @@ struct CardInteraction: View {
             }
             VStack {
                 Button {
+                    toggle1.toggle()
                     controller.requestSwipe(.left)
                 } label: {
-                    AccentedButton()
+                    AccentedButton(imageName: "DislikeButton")
+                }
+                .keyframeAnimator(initialValue: ButtonProperties(), trigger: toggle1) {
+                    content, value in
+                    content
+                        .scaleEffect(value.scale)
+                        .scaleEffect(x: value.horizontalStretch)
+                        .scaleEffect(y: value.verticalStretch)
+                        .rotationEffect(Angle(degrees: value.rotation))
+                } keyframes: { _ in
+                    KeyframeTrack(\.scale) {
+                        SpringKeyframe(0.75, duration: animationDuration * 0.35)
+                        SpringKeyframe(1, duration: animationDuration * 0.35)
+                        
+                    }
                 }
                 Button {
+                    toggle2.toggle()
                     navState.currentCar = controller.currentCar
                 } label: {
-                    AccentedButton()
+                    AccentedButton(imageName: "FlipButton")
                 }
                 .keyframeAnimator(initialValue: ButtonProperties(), trigger: toggle2) {
                     content, value in
@@ -44,9 +62,24 @@ struct CardInteraction: View {
                     }
                 }
                 Button {
+                    toggle3.toggle()
                     controller.requestSwipe(.right)
                 } label: {
-                    AccentedButton()
+                    AccentedButton(imageName: "LikeButton")
+                }
+                .keyframeAnimator(initialValue: ButtonProperties(), trigger: toggle3) {
+                    content, value in
+                    content
+                        .scaleEffect(value.scale)
+                        .scaleEffect(x: value.horizontalStretch)
+                        .scaleEffect(y: value.verticalStretch)
+                        .rotationEffect(Angle(degrees: value.rotation))
+                } keyframes: { _ in
+                    KeyframeTrack(\.scale) {
+                        SpringKeyframe(0.75, duration: animationDuration * 0.35)
+                        SpringKeyframe(1, duration: animationDuration * 0.35)
+                        
+                    }
                 }
             }
             .padding()

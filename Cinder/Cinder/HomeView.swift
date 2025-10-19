@@ -14,6 +14,7 @@ struct HomeView: View {
     @StateObject var imageService: CarImageService = CarImageService()
     var body: some View {
         ZStack {
+            HeaderView()
             CardStack(controller: cardController)
                 .environmentObject(settingsManager)
                 .environmentObject(imageService)
